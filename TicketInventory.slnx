@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TicketInventory.Api/TicketInventory.Api.csproj" />
+  <Project Path="TicketInventory.Domain/TicketInventory.Domain.csproj" />
+  <Project Path="TicketInventory.Infrastructure/TicketInventory.Infrastructure.csproj" />
+  <Project Path="TicketInventory.Tests/TicketInventory.Tests.csproj" />
+</Solution>
