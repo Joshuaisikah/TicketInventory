@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
+using TicketInventory.Api.Services;
 using TicketInventory.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+builder.Services.AddScoped<IPurchaseService, PurchaseService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 //lets add the TicketInventory DbContex
 builder.Services.AddDbContext<InventoryDbContext>(options =>
@@ -17,7 +22,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
+app.MapControllers();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.Run();

@@ -15,8 +15,7 @@ public enum DeleteEventResult
 public enum CreateEventResult
 {
     Success,
-    InvalidRequest,
-    AlreadyExists,
+    AlreadyExists
 }
 
 public class EventService : IEventService
