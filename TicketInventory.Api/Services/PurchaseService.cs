@@ -43,9 +43,11 @@ public class PurchaseService : IPurchaseService
             var current = await _dbContext
                 .Events.AsNoTracking()
                 .Where(e => e.Id == Eventid)
-                .Select(e => e.TotalTickets - e.Sold)
-                .FirstAsync(ct);
-            return (PurchaseResult.NotEnoughTickets, null, current);
+                .Select(e => (int?)( e.TotalTickets - e.Sold))
+                .FirstOrDefaultAsync(ct);
+            return current is null
+                ? (PurchaseResult.EventNotFound, null, null)
+                : (PurchaseResult.NotEnoughTickets, null, current);
         }
         var order = new Order { EventId = Eventid, Quantity = Quantity };
         _dbContext.Orders.Add(order);
